@@ -222,7 +222,7 @@ typedef void (*statefn)(void);
 
 statefn currentstate;
 unsigned long startmillis;
-unsigned long endsnooze;
+unsigned long endmillis;
 
 void set_state(statefn);
 void snooze(int);
@@ -237,16 +237,12 @@ unsigned long stateMillis(void) { return millis() - startmillis; }
 // Thus ping() cedes to pong() and vice versa
 void set_state(statefn func) {
   currentstate = func;
-  startmillis = millis();
-  
-	Serial.print("State: ");
-	Serial.println((unsigned long) currentstate, HEX);
-
+  startmillis = endmillis = millis();
 }
 
 // Snooze: Suspend this state machine for (int) millis
 void snooze(int ms) { 
-	endsnooze = millis() + ms; 
+	endmillis = millis() + ms; 
 }
 
 void init_state(statefn initialState) {
@@ -352,7 +348,6 @@ void showText(char *text) {
 	t = displaytext;
 	ho = 0;
 	set_state(scrolling);
-Serial.println(text);
 }
 
 
@@ -411,7 +406,7 @@ void initTextwhacker(void) {
 
 // This must be called in loop(), frequently, to run the state machine
 void runTextwhacker(void) {
-	if (millis() >= endsnooze) {
+	if (millis() >= endmillis) {
 		if (currentstate) {
 			(*currentstate)();
 		}
