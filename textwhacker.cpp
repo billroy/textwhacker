@@ -238,6 +238,10 @@ unsigned long stateMillis(void) { return millis() - startmillis; }
 void set_state(statefn func) {
   currentstate = func;
   startmillis = millis();
+  
+	Serial.print("State: ");
+	Serial.println((unsigned long) currentstate, HEX);
+
 }
 
 // Snooze: Suspend this state machine for (int) millis
@@ -348,6 +352,7 @@ void showText(char *text) {
 	t = displaytext;
 	ho = 0;
 	set_state(scrolling);
+Serial.println(text);
 }
 
 
@@ -390,10 +395,12 @@ void dwell(void) {
 // Initialization
 //
 void initTextwhacker(void) {
-	fgcolor = COLOR_WHITE;
-	bgcolor = COLOR_BLACK;
 	spi_init();
+
 	setVersion(BOARD_VERSION);
+	fgcolor = COLOR_WHITE;		// depends on setVersion()
+	bgcolor = COLOR_BLACK;		// depends on setVersion()
+
 	setNumBoards(NUMBOARDS);	// default to one board
 	init_state(idle);
 	snooze(1000);		// give the blinky thing time to start up

@@ -36,7 +36,7 @@
 numvar func_tprintf(void) {
 	initDisplayBuffer();
 	setOutputHandler(&displayPutChar);
-	func_printf_handler(0,1);	// format=arg(0), optional args start at 1
+	func_printf_handler(1,2);	// format=arg(1), optional args start at 2
 	resetOutputHandler();
 	showText(displaytext);
 	return 0;
