@@ -1,0 +1,22 @@
+
+
+spi interface
+
+how to run bitlash while waiting for scroll complete/idle?
+
+
+---
+How to?
+---
+set numboards
+set version
+
+
+Functions:
+----------
+tprintf
+fgcolor
+bgcolor
+scroll
+
+fill
