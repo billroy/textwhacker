@@ -1,7 +1,7 @@
 /***
 	textwhacker.cpp - Text display driver library for SparkFun 8x8 RGB Serial/SPI LED Array
 
-	Copyright (C) 2009-2011 Palmeta Software LLC
+	Copyright (C) 2009-2012 Bill Roy
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,11 @@
 	The author can be contacted at bill@bitlash.net.
 
 ***/
-#include "WProgram.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+	#include "Arduino.h"
+#else
+	#include "WProgram.h"
+#endif
 #include "textwhacker.h"
 
 //////////
@@ -371,7 +375,7 @@ void idle(void) {
 	snooze(1000000L);	// chill out until next call to showText
 }
 
-#define DWELLWAIT 1000UL
+#define DWELLWAIT 500UL
 
 //////////
 //
@@ -392,11 +396,11 @@ void dwell(void) {
 void initTextwhacker(void) {
 	spi_init();
 
+	setNumBoards(NUMBOARDS);
 	setVersion(BOARD_VERSION);
 	fgcolor = COLOR_WHITE;		// depends on setVersion()
 	bgcolor = COLOR_BLACK;		// depends on setVersion()
 
-	setNumBoards(NUMBOARDS);	// default to one board
 	init_state(idle);
 	snooze(1000);		// give the blinky thing time to start up
 	delay(3000);		// the smiley face startup is cute, but she hurts us here

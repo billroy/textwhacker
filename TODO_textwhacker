@@ -1,6 +1,12 @@
 
 
-spi interface
+function static {fill(random(8));snooze(random(200))};
+function jack {tprintf("all work and no play makes Jack a dull boy.");};
+function ping {fill(color("red"));delay(25);fill(color("black"));};
+
+function cs {d16=arg(1);};
+function so {m=0x80;while m {d15=arg(1)&m;d14=1;d14=0;m=m>>1}};
+function sa {cs(0);i=64;while i-- so(arg(1));cs(1);};
 
 how to run bitlash while waiting for scroll complete/idle?
 
@@ -8,6 +14,7 @@ how to run bitlash while waiting for scroll complete/idle?
 ---
 How to?
 ---
+set pins
 set numboards
 set version
 

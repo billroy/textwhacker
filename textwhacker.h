@@ -1,7 +1,7 @@
 /***
 	textwhacker.h - Text display driver library for SparkFun 8x8 RGB Serial/SPI LED Array
 
-	Copyright (C) 2009-2011 Palmeta Software LLC
+	Copyright (C) 2009-2012 Bill Roy
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,7 +20,11 @@
 	The author can be contacted at bill@bitlash.net.
 
 ***/
-#include "WProgram.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+	#include "Arduino.h"
+#else
+	#include "WProgram.h"
+#endif
 #include "avr/pgmspace.h"
 
 

@@ -2,7 +2,7 @@
 //
 //	bitlash_textwhacker.pde: Bitlash-Textwhacker integration
 //
-//	Copyright 2011 by Bill Roy
+//	Copyright 2011-2012 by Bill Roy
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -27,11 +27,14 @@
 //
 //////////////////////////////////////////////////////////////////
 //
-#include "WProgram.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+	#include "Arduino.h"
+#else
+	#include "WProgram.h"
+#endif
 #include "bitlash.h"
 #include "../../libraries/bitlash/src/bitlash.h"
 #include "textwhacker.h"
-
 
 numvar func_tprintf(void) {
 	initDisplayBuffer();
@@ -71,10 +74,10 @@ void setup(void) {
 	initTextwhacker();
 
 	// Scrolling text marquee
-	addBitlashFunction("tprintf", 	(bitlash_function) func_tprintf);
+	addBitlashFunction("text", 		(bitlash_function) func_tprintf);
 	addBitlashFunction("fgcolor", 	(bitlash_function) func_fgcolor);
 	addBitlashFunction("bgcolor", 	(bitlash_function) func_bgcolor);
-	addBitlashFunction("scroll", 	(bitlash_function) func_scroll);
+	addBitlashFunction("speed", 	(bitlash_function) func_scroll);
 
 	// Fill display with a color
 	addBitlashFunction("fill", 		(bitlash_function) func_fill);
@@ -82,8 +85,10 @@ void setup(void) {
 	// Return color number for string color name, e.g.: fill(color("red"))
 	addBitlashFunction("color", 	(bitlash_function) func_color);
 
-	fill(getcolor("blue"));
-	showText("Textwhacker here!");
+	fill(getcolor("green")); delay(125);
+	fill(getcolor("blue")); delay(125);
+	fill(getcolor("white")); delay(125);
+	fill(getcolor("black"));
 }
 
 void loop(void) {
