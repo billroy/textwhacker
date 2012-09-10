@@ -1,12 +1,14 @@
 # Textwhacker readme
 
+Textwhacker enables Bitlash to print scrolling marquee text to a Sparkfun LED matrix.
+
 ## Install
 
 Install Bitlash per instructions at http://bitlash.net
 
 Install this textwhacker library in the same place you put Bitlash
 
-Connect your Sparkfun LED array per these notes in textwhacker.cpp,
+Connect your Sparkfun LED matrix per these notes in textwhacker.cpp,
 or change these lines to be appropriate for your hardware setup:
 
 	//////////
